@@ -14,6 +14,12 @@ html, body {
     width: 760px;
 }
 
+.pull-left {
+}
+
+.pull-right {
+}
+
 
 /********************************
 * Structure / App specific Styles
@@ -46,3 +52,33 @@ html, body {
     text-align: center;
 }
 
+.timer-app .nav button {
+    border-radius: 100px;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    font-size: 1.25em;
+}
+
+.timer-app .nav {
+    margin-top: 20px;
+}
+
+.timer-app .nav button:hover {
+    background: #fefefe;
+    cursor: pointer;
+}
+
+.timer-app #laps {
+    margin: 40px 0 100px 0;
+    list-style: none;
+}
+
+.timer-app #laps li{
+    font-size: 1.125em;
+    list-style: none;
+    color: #888;
+    width: 90%;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+}
