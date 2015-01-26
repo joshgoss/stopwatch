@@ -36,13 +36,17 @@ timerApp.updateTimerViews = function(minutes, seconds, centiseconds) {
   timerApp.views.centisecondsDisplay.innerHTML = centiseconds;
 };
 
-timerApp.updateTimer = function (milliseconds) {
+timerApp.getTimeData = function(milliseconds) {
   // Get minutes, seconds, and centiseconds data
   var centiseconds = Math.ceil(milliseconds/10) % 100;
   var seconds = Math.ceil(milliseconds/1000) % 60000;
   var minutes = Math.ceil(milliseconds / 60000);
-  
-  timerApp.updateTimerViews(minutes, seconds, centiseconds);
+  return [minutes, seconds, centiseconds];
+}
+
+timerApp.updateTimer = function (milliseconds) {
+  timerData = timerApp.getTimeData(milliseconds);
+  timerApp.updateTimerViews(timerData[0], timerData[1], timerData[2]);
 };
 
 timerApp.startTimer = function() {
@@ -71,18 +75,15 @@ timerApp.stopTimer = function() {
 
 timerApp.resetTimer = function () {
   window.clearInterval(timerApp.state.intervalId);
-  window.milliseconds = 0;
+  timerApp.state.milliseconds = 0;
   timerApp.updateTimerViews(0, 0 ,0);
   timerApp.clearLaps();
 };
 
 timerApp.addLap = function(currentTime, prevLap) {
-  var curLap = currentTIme - prevLap;
+  var curLap = currentTime - prevLap;
   timerApp.state.laps.push(curLap);
-  timerApp.views.lapsDisplay.innerHTML.concat(
-    timerApp.views.lapsDisplay.innerHTML,
-    '<li>' + timerApp.state.laps.length + ' ' + curLap + '</li>'
-  )
+  timerApp.views.lapsDisplay.innerHTML = timerApp.views.lapsDisplay.innerHTML + '<li>' + timerApp.state.laps.length + ' ' + curLap + '</li>';
   return curLap;
 };
 
