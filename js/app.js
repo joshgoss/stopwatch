@@ -20,9 +20,9 @@ timerApp.views = {
   'startButton': document.getElementById("start"),
   'stopButton': document.getElementById("stop"),
   'lapButton': document.getElementById("lap"),
-  'lapButton': document.getElementById("lap"),
   'resetButton': document.getElementById("reset"),
-   'minutesDisplay': document.getElementById("seconds")
+   'minutesDisplay': document.getElementById("seconds"),
+  'lapsDisplay': document.getElementById('laps')
 };
 
 
@@ -72,9 +72,8 @@ timerApp.stopTimer = function() {
 timerApp.resetTimer = function () {
   window.clearInterval(timerApp.state.intervalId);
   window.milliseconds = 0;
-  timerApp.state.laps = [];
-  timerApp.state.lastLap = null;
   timerApp.updateTimerViews(0, 0 ,0);
+  timerApp.clearLaps();
 };
 
 timerApp.addLap = function(lap) {
@@ -83,6 +82,12 @@ timerApp.addLap = function(lap) {
 
 timerApp.calculateLap = function(previousTime, currentTime) {
   return currentTime - currentTime;
+};
+
+timerApp.clearLaps = function() {
+  timerApp.state.laps = []
+  timerApp.lastLap = null;
+  timerApp.views.lapsDisplay.innerHTML = '';
 };
 
 
