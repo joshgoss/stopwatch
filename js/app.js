@@ -1,12 +1,18 @@
 var timerApp = {};
 
 /*********************
-* Private Attributes
+* timerApp State
 **********************/
-timerApp.milliseconds = 0;
-timerApp.laps = [];
-timerApp.lastLap = null;
+timerApp.state = {};
+timerApp.state.milliseconds = 0;
+timerApp.state.laps = [];
+timerApp.state.lastLap = null;
+timerApp.state.intervalId = null;
 
+
+/********************
+* timerApp DOM views
+**********************/
 timerApp.views = {
   'centisecondsDisplay': document.getElementById("centiseconds"),
   'secondsDisplay': document.getElementById("seconds"),
@@ -16,6 +22,17 @@ timerApp.views = {
    'minutesDisplay': document.getElementById("seconds")
 };
 
+/*******************
+* Event Listeners
+*******************/
+timerApp.views.startButton.addEventListener("click", function() {
+    timerApp.state.intervalId = window.setInterval(function(){
+      timerApp.state.milliseconds += 1;
+    });
+}, false);
+
+// stopButton.addEventListener("click", function(){
+// });
 
 /**********************
 * Public Functions
@@ -43,42 +60,14 @@ timerApp.stopTimer = function() {
 timerApp.resetTimer = function () {
   window.clearInterval(intervalId);
   window.milliseconds = 0;
-  timerApp.laps = [];
-  timerApp.lastLap = null;
+  timerApp.state.laps = [];
+  timerApp.state.lastLap = null;
 };
 
 timerApp.addLap = function(lap) {
-  timerApp.laps.push(lap);
+  timerApp.state.laps.push(lap);
 };
 
 timerApp.calculateLap = function(previousTime, currentTime) {
   return currentTime - currentTime;
 };
-
-var minutesDisplay = document.getElementById("minutes");
-var laps = [];
-var intervalId = null;
-
-
-var milliseconds = 0;
-
-var updateTime = function() {
-    centisecondsDisplay.innerHTML = centiseconds;
-    secondsDisplay.innerHTML = seconds;
-    minutesDisplay.innerHTML = minutes;
-};
-
-
-startButton.addEventListener("click", function() {
-    intervalId = window.setInterval(function(){
-        centiseconds += 1;
-        console.log("centisecond passed");
-        updateTime();
-    }, 100);
-}, false);
-
-// stopButton.addEventListener("click", function(){
-// });
-
-
-
