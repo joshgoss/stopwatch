@@ -91,7 +91,7 @@ timerApp.addLap = function(currentTime) {
   timerApp.state.laps.push(curLap);
   timerApp.state.lastLap = currentTime;
 
-  timerApp.views.lapsDisplay.innerHTML = timerApp.views.lapsDisplay.innerHTML + '<li>' + timerApp.state.laps.length + ' ' + curLap + '</li>';
+  timerApp.views.lapsDisplay.innerHTML = '<li>' + timerApp.state.laps.length + ' ' + curLap +'</li>'+ timerApp.views.lapsDisplay.innerHTML;
   return curLap;
 };
 
