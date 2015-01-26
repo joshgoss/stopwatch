@@ -80,9 +80,17 @@ timerApp.resetTimer = function () {
   timerApp.clearLaps();
 };
 
-timerApp.addLap = function(currentTime, prevLap) {
-  var curLap = currentTime - prevLap;
+timerApp.addLap = function(currentTime) {
+  var curLap = null;
+  
+  if (timerApp.state.lastLap === null) {
+    timerApp.state.lastLap = 0;
+  }
+  
+  curLap = currentTime - timerApp.state.lastLap;
   timerApp.state.laps.push(curLap);
+  timerApp.state.lastLap = currentTime;
+
   timerApp.views.lapsDisplay.innerHTML = timerApp.views.lapsDisplay.innerHTML + '<li>' + timerApp.state.laps.length + ' ' + curLap + '</li>';
   return curLap;
 };
@@ -111,5 +119,5 @@ timerApp.views.resetButton.addEventListener("click", function(){
 });
 
 timerApp.views.lapButton.addEventListener('click', function() {
-  timerApp.addLap(timerApp.state.milliseconds, timerApp.state.lastLap);
+  timerApp.addLap(timerApp.state.milliseconds);
 });
