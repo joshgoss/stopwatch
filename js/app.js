@@ -76,13 +76,16 @@ timerApp.resetTimer = function () {
   timerApp.clearLaps();
 };
 
-timerApp.addLap = function(lap) {
-  timerApp.state.laps.push(lap);
+timerApp.addLap = function(currentTime, prevLap) {
+  var curLap = currentTIme - prevLap;
+  timerApp.state.laps.push(curLap);
+  timerApp.views.lapsDisplay.innerHTML.concat(
+    timerApp.views.lapsDisplay.innerHTML,
+    '<li>' + timerApp.state.laps.length + ' ' + curLap + '</li>'
+  )
+  return curLap;
 };
 
-timerApp.calculateLap = function(previousTime, currentTime) {
-  return currentTime - currentTime;
-};
 
 timerApp.clearLaps = function() {
   timerApp.state.laps = []
@@ -104,4 +107,8 @@ timerApp.views.stopButton.addEventListener("click", function(){
 
 timerApp.views.resetButton.addEventListener("click", function(){
   timerApp.resetTimer();
+});
+
+timerApp.views.lapButton.addEventListener('click', function() {
+  timerApp.addLap(timerApp.state.milliseconds, timerApp.state.lastLap);
 });
