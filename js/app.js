@@ -15,13 +15,11 @@ timerApp.state.intervalId = null;
 * timerApp DOM views
 **********************/
 timerApp.views = {
-  'centisecondsDisplay': document.getElementById("centiseconds"),
-  'secondsDisplay': document.getElementById("seconds"),
+  'timerDisplay': document.getElementById('timer'),
   'startButton': document.getElementById("start"),
   'stopButton': document.getElementById("stop"),
   'lapButton': document.getElementById("lap"),
   'resetButton': document.getElementById("reset"),
-   'minutesDisplay': document.getElementById("seconds"),
   'lapsDisplay': document.getElementById('laps')
 };
 
@@ -29,18 +27,20 @@ timerApp.views = {
 /**********************
 * Methods
 ***********************/
+timerApp.toTwoDigits = function(num) {
+  return num >= 10 ? num.toString() : "0" + num.toString();
+};
+
 timerApp.updateTimerViews = function(minutes, seconds, centiseconds) {
   // Update DOM 
-  timerApp.views.minutesDisplay.innerHTML = minutes;
-  timerApp.views.secondsDisplay.innerHTML = seconds;
-  timerApp.views.centisecondsDisplay.innerHTML = centiseconds;
+  timerApp.views.timerDisplay.innerHTML = timerApp.toTwoDigits(minutes) + ':' + timerApp.toTwoDigits(seconds) + ':' + timerApp.toTwoDigits(centiseconds);
 };
 
 timerApp.getTimeData = function(milliseconds) {
   // Get minutes, seconds, and centiseconds data
-  var centiseconds = Math.ceil(milliseconds/10) % 100;
-  var seconds = Math.ceil(milliseconds/1000) % 60000;
-  var minutes = Math.ceil(milliseconds / 60000);
+  var centiseconds = Math.floor(milliseconds/10) % 100;
+  var seconds = Math.floor(milliseconds/1000) % 60000;
+  var minutes = Math.floor(milliseconds / 60000);
   return [minutes, seconds, centiseconds];
 }
 

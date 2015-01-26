@@ -6,23 +6,22 @@
      <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
-    <div>
-        <span id="minutes">0</span>
-        <span>:</span>
-        <span id="seconds">0</span>
-        <span>.</span>
-        <span id="centiseconds">0</span>
-    </div>
+    <div class="container timer-app">
+        <h2 class="title">Stopwatch</h2>
+        <div class="timer-container">
+          <span id="timer">00:00:00</span>
+        </div>
 
-    <div>
-      <button id="start">Start</button>
-      <button id="stop" class="hide">Stop</button>
-      <button id="reset">Reset</button>
-      <button id="lap" class="hide">Lap</button>
-    </div>
+        <div class="nav">
+          <button id="start">Start</button>
+          <button id="stop" class="hide">Stop</button>
+          <button id="reset">Reset</button>
+          <button id="lap" class="hide">Lap</button>
+        </div>
 
-    <ul id="laps">
-    </ul>
+        <ul id="laps">
+        </ul>
+    </div>
 
     <script src="js/app.js"></script>
   </body>
