@@ -30,15 +30,15 @@ timerApp.views = {
 * Methods
 ***********************/
 timerApp.updateTimerView = function (milliseconds) {
+  // Get minutes, seconds, and centiseconds data
   var centiseconds = Math.ceil(milliseconds/10) % 100;
   var seconds = Math.ceil(milliseconds/1000) % 60000;
-  var minutes = Math.ceil(milliseconds/60000);
-
+  var minutes = Math.ceil(milliseconds / 60000);
   
-  timerApp.views.minutesDisplay.innerHTML = centiseconds;
+  // Update DOM 
+  timerApp.views.minutesDisplay.innerHTML = minutes;
   timerApp.views.secondsDisplay.innerHTML = seconds;
-  timerApp.views.centisecondsDisplay.innerHTML = minutes;
-  
+  timerApp.views.centisecondsDisplay.innerHTML = centiseconds;
 };
 
 timerApp.startTimer = function() {
