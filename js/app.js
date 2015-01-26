@@ -52,7 +52,7 @@ timerApp.updateTimer = function (milliseconds) {
 timerApp.startTimer = function() {
   // Toggle visibility of buttons;
   timerApp.views.startButton.className = 'hide';
-  timerApp.views.stopButton.className = '';
+  timerApp.views.stopButton.className = 'red';
   timerApp.views.resetButton.className = 'hide';
   timerApp.views.lapButton.className = '';
   
@@ -65,7 +65,7 @@ timerApp.startTimer = function() {
 
 timerApp.stopTimer = function() {
   // Toggle visibility of buttons;
-  timerApp.views.startButton.className = '';
+  timerApp.views.startButton.className = 'green';
   timerApp.views.stopButton.className = 'hide';
   timerApp.views.resetButton.className = '';
   timerApp.views.lapButton.className = 'hide';

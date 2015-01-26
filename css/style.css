@@ -28,6 +28,9 @@ html, body {
   clear: both;
 }
 
+.green { color: #13F24B; }
+.red { color: #F21317; }
+
 
 /********************************
 * Structure / App specific Styles
