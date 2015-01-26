@@ -82,6 +82,8 @@ timerApp.resetTimer = function () {
 
 timerApp.addLap = function(currentTime) {
   var curLap = null;
+  var timeData = null
+  var timeStr = null;
   
   if (timerApp.state.lastLap === null) {
     timerApp.state.lastLap = 0;
@@ -90,8 +92,13 @@ timerApp.addLap = function(currentTime) {
   curLap = currentTime - timerApp.state.lastLap;
   timerApp.state.laps.push(curLap);
   timerApp.state.lastLap = currentTime;
+  
+  timeData = timerApp.getTimeData(curLap);
+  timeStr = timerApp.toTwoDigits(timerData[0]) + ':' + timerApp.toTwoDigits(timerData[1]) + ':' + timerApp.toTwoDigits(timeData[2]);
+  
 
-  timerApp.views.lapsDisplay.innerHTML = '<li>' + timerApp.state.laps.length + ' ' + curLap +'</li>'+ timerApp.views.lapsDisplay.innerHTML;
+
+  timerApp.views.lapsDisplay.innerHTML = '<li class="group">' + '<span class="pull-left">Lab ' + timerApp.state.laps.length + '</span> <span class="pull-right">' + timeStr +'</span></li>'+ timerApp.views.lapsDisplay.innerHTML;
   return curLap;
 };
 

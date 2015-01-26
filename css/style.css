@@ -15,9 +15,17 @@ html, body {
 }
 
 .pull-left {
+    float: left;
 }
 
 .pull-right {
+    float: right;
+}
+
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 
