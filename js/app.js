@@ -18,81 +18,51 @@ timerApp.views = {
   'centisecondsDisplay': document.getElementById("centiseconds"),
   'secondsDisplay': document.getElementById("seconds"),
   'startButton': document.getElementById("start"),
+  'stopButton': document.getElementById("stop"),
+  'lapButton': document.getElementById("lap"),
   'lapButton': document.getElementById("lap"),
   'resetButton': document.getElementById("reset"),
    'minutesDisplay': document.getElementById("seconds")
 };
 
-/*******************
-* Event Listeners
-*******************/
-timerApp.views.startButton.addEventListener("click", function() {
-    timerApp.startTimer();
-}, false);
-
-// stopButton.addEventListener("click", function(){
-// });
-
 
 /**********************
 * Methods
 ***********************/
-timerApp.getCentiSeconds = function(milliseconds) {
-  if (milliseconds >= 10) {
-    return [milliseconds / 10, milliseconds % 10];
-  } else {
-    return [0, 0]
-  }
-};
+timerApp.updateTimerView = function (milliseconds) {
+  var centiseconds = Math.ceil(milliseconds/10) % 100;
+  var seconds = Math.ceil(milliseconds/1000) % 60000;
+  var minutes = Math.ceil(milliseconds/60000);
 
-timerApp.getSeconds = function(milliseconds) {
-  if (milliseconds >= 1000) {
-    return [milliseconds / 1000, milliseconds % 1000];
-  } else {
-    return [0, 0]
-  }
-};
-
-timerApp.getMinutes = function(milliseconds) {
-  if (milliseconds >= 60000) {
-    return [milliseconds / 60000, milliseconds % 60000] ;
-    return 
-  } else {
-    return [0, 0];
-  }
-};
-
-timerApp.updateTimerView = function(milliseconds) {
-  var timeData = null;
-  var remainingMilliseconds = null;
-  var minutes = null;
-  var seconds = null;
-  var centiseconds = null;
-
-  // Get minutes
-  timeData = getMinutes(milliseconds);
-  minutes = timeData[0];
-  var remainingMilliseconds = timeData=[1];
   
-  // Get seconds
-  timeData = getSeconds(milliseconds);
-  seconds = timeData[0];
-  remainingMilliseconds = timeData[1];
+  timerApp.views.minutesDisplay.innerHTML = centiseconds;
+  timerApp.views.secondsDisplay.innerHTML = seconds;
+  timerApp.views.centisecondsDisplay.innerHTML = minutes;
   
-  //Get centiseconds
-  timeData = getCentiSeconds(milliseconds);
-  centiseconds = timeData[0];
 };
 
 timerApp.startTimer = function() {
-    timerApp.state.intervalId = window.setInterval(function(){
-      timerApp.state.milliseconds += 1;
-      timerApp.updateTimerView(timerApp.state.milliseconds);
-    });
+  // Toggle visibility of buttons;
+  timerApp.views.startButton.className = 'hide';
+  timerApp.views.stopButton.className = '';
+  timerApp.views.resetButton.className = 'hide';
+  timerApp.views.lapButton.className = '';
+  
+  // Update timer
+  timerApp.state.intervalId = window.setInterval(function(){
+    timerApp.state.milliseconds += 1;
+    timerApp.updateTimerView(timerApp.state.milliseconds);
+  }, 1);
 };
 
 timerApp.stopTimer = function() {
-  window.clearInterval(intervalId);
+  // Toggle visibility of buttons;
+  timerApp.views.startButton.className = '';
+  timerApp.views.stopButton.className = 'hide';
+  timerApp.views.resetButton.className = '';
+  timerApp.views.lapButton.className = 'hide';
+  
+  window.clearInterval(timerApp.state.intervalId);
 };
 
 timerApp.resetTimer = function () {
@@ -109,3 +79,15 @@ timerApp.addLap = function(lap) {
 timerApp.calculateLap = function(previousTime, currentTime) {
   return currentTime - currentTime;
 };
+
+
+/*******************
+* Event Listeners
+*******************/
+timerApp.views.startButton.addEventListener("click", function() {
+    timerApp.startTimer();
+}, false);
+
+timerApp.views.stopButton.addEventListener("click", function(){
+  timerApp.stopTimer();
+});
