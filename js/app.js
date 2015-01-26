@@ -1,4 +1,5 @@
-var timerApp = {};
+var timerApp = {};   
+
 
 /*********************
 * timerApp State
@@ -26,31 +27,68 @@ timerApp.views = {
 * Event Listeners
 *******************/
 timerApp.views.startButton.addEventListener("click", function() {
-    timerApp.state.intervalId = window.setInterval(function(){
-      timerApp.state.milliseconds += 1;
-    });
+    timerApp.startTimer();
 }, false);
 
 // stopButton.addEventListener("click", function(){
 // });
 
-/**********************
-* Public Functions
-***********************/
-timerApp.getMilliseconds = function(milliseconds) {
- 
-};
 
-timerApp.getCentiseconds = function(milliseconds) {
+/**********************
+* Methods
+***********************/
+timerApp.getCentiSeconds = function(milliseconds) {
+  if (milliseconds >= 10) {
+    return [milliseconds / 10, milliseconds % 10];
+  } else {
+    return [0, 0]
+  }
 };
 
 timerApp.getSeconds = function(milliseconds) {
+  if (milliseconds >= 1000) {
+    return [milliseconds / 1000, milliseconds % 1000];
+  } else {
+    return [0, 0]
+  }
 };
 
 timerApp.getMinutes = function(milliseconds) {
+  if (milliseconds >= 60000) {
+    return [milliseconds / 60000, milliseconds % 60000] ;
+    return 
+  } else {
+    return [0, 0];
+  }
+};
+
+timerApp.updateTimerView = function(milliseconds) {
+  var timeData = null;
+  var remainingMilliseconds = null;
+  var minutes = null;
+  var seconds = null;
+  var centiseconds = null;
+
+  // Get minutes
+  timeData = getMinutes(milliseconds);
+  minutes = timeData[0];
+  var remainingMilliseconds = timeData=[1];
+  
+  // Get seconds
+  timeData = getSeconds(milliseconds);
+  seconds = timeData[0];
+  remainingMilliseconds = timeData[1];
+  
+  //Get centiseconds
+  timeData = getCentiSeconds(milliseconds);
+  centiseconds = timeData[0];
 };
 
 timerApp.startTimer = function() {
+    timerApp.state.intervalId = window.setInterval(function(){
+      timerApp.state.milliseconds += 1;
+      timerApp.updateTimerView(timerApp.state.milliseconds);
+    });
 };
 
 timerApp.stopTimer = function() {
