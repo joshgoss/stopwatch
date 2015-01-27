@@ -75,7 +75,8 @@ html, body {
 }
 
 .timer-app .nav {
-    margin: 20px 0 0 70px;
+    display: table;
+    margin: 20px auto;
 }
 
 .timer-app .nav button:hover {
@@ -95,4 +96,16 @@ html, body {
     width: 90%;
     border-bottom: 1px solid #e0e0e0;
     margin-bottom: 20px;
+}
+
+
+/******************
+* Media Queries 
+*******************/
+
+
+@media (max-width: 759px ) {
+    .container {
+        width: 100%;
+    }
 }
