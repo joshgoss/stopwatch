@@ -35,7 +35,7 @@ var timerApp = (function(){
   };
 
   var _clearLaps = function() {
-    var lapsElm = documents.getElementById('laps');
+    var lapsElm = document.getElementById('laps');
     _laps = [];
     _lastLap = null;
     lapsElm.innerHTML = '';
