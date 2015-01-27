@@ -4,12 +4,12 @@ var timerApp = {};
 /*********************
 * timerApp State
 **********************/
-timerApp.state = {};
-timerApp.state.milliseconds = 0;
-timerApp.state.laps = [];
-timerApp.state.lastLap = null;
-timerApp.state.intervalId = null;
-
+timerApp.state = {
+  milliseconds: 0,
+  laps: [],
+  lastLap: null,
+  intervalId: null
+};
 
 /********************
 * timerApp DOM views
@@ -38,9 +38,9 @@ timerApp.updateTimerViews = function(minutes, seconds, centiseconds) {
 
 timerApp.getTimeData = function(milliseconds) {
   // Get minutes, seconds, and centiseconds data
-  var centiseconds = Math.floor(milliseconds/10) % 100;
-  var seconds = Math.floor(milliseconds/1000) % 60000;
-  var minutes = Math.floor(milliseconds / 60000);
+  var centiseconds = Math.floor(milliseconds) % 100;
+  var seconds = Math.floor(milliseconds/100) % 60000;
+  var minutes = Math.floor(milliseconds / 6000);
   return [minutes, seconds, centiseconds];
 }
 
@@ -60,7 +60,7 @@ timerApp.startTimer = function() {
   timerApp.state.intervalId = window.setInterval(function(){
     timerApp.state.milliseconds += 1;
     timerApp.updateTimer(timerApp.state.milliseconds);
-  }, 1);
+  }, 10);
 };
 
 timerApp.stopTimer = function() {
