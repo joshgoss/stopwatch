@@ -87,7 +87,7 @@ var timerApp = (function(){
       _updateTimerViews(0, 0 ,0);
       _clearLaps();
     },
-    addLap: function(currentTime) {
+    addLap: function() {
       var curLap = null;
       var timeData = null;
       var timeStr = null;
@@ -97,9 +97,9 @@ var timerApp = (function(){
         _lastLap = 0;
       }
 
-      curLap = currentTime - _lastLap;
+      curLap = _centiseconds - _lastLap;
       _laps.push(curLap);
-      _lastLap = currentTime;
+      _lastLap = _centiseconds;
 
       timeData = _getTimeData(curLap);
       timeStr = _toTwoDigits(timeData[0]) + ':' + _toTwoDigits(timeData[1]) + ':' + _toTwoDigits(timeData[2]);
@@ -128,5 +128,5 @@ document.getElementById('reset').addEventListener("click", function(){
 });
 
 document.getElementById('lap').addEventListener('click', function() {
-  timerApp.addLap(timerApp.getCentiseconds());
+  timerApp.addLap();
 });
