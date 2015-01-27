@@ -34,7 +34,7 @@ var timerApp = (function(){
     _updateTimerViews(timerData[0], timerData[1], timerData[2]);
   };
 
-  var clearLaps = function() {
+  var _clearLaps = function() {
     var lapsElm = documents.getElementById('laps');
     _laps = [];
     _lastLap = null;
