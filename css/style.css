@@ -28,6 +28,8 @@ html, body {
   clear: both;
 }
 
+.light { color: #999; }
+
 .green { color: #13F24B; }
 .red { color: #F21317; }
 

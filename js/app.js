@@ -4,8 +4,9 @@ var timerApp = (function(){
    **********************/
   var _centiseconds = 0;
   var _laps = [];
-  var _lastLap = null;
+  var _lastLap = 0;
   var _interValId = null;
+  var _lapElapsed = null;
 
 
   /********************* 
@@ -20,14 +21,22 @@ var timerApp = (function(){
     // Update DOM 
     elm.innerHTML = _toTwoDigits(minutes) + ':' + _toTwoDigits(seconds) + ':' + _toTwoDigits(centiseconds);
   };
-
+  
+  
   var _getTimeData = function(centiseconds) {
     // Get minutes, seconds, and centiseconds data
     var updatedCentiseconds = Math.floor(centiseconds) % 100;
     var seconds = Math.floor(centiseconds/100) % 60;
     var minutes = Math.floor(centiseconds / 6000);
     return [minutes, seconds, updatedCentiseconds];
-  }
+  };
+
+  var _updateLapTimer = function(centiseconds) {
+    var elm = document.getElementById('lap-timer');
+    var time = centiseconds - _lastLap;
+    var timeData = _getTimeData(time);
+    elm.innerHTML = _toTwoDigits(timeData[0]) + ':' + _toTwoDigits(timeData[1]) + ':' + _toTwoDigits(timeData[2]);
+  };
 
   var _updateTimer = function (centiseconds) {
     var timerData = _getTimeData(centiseconds);
@@ -36,9 +45,13 @@ var timerApp = (function(){
 
   var _clearLaps = function() {
     var lapsElm = document.getElementById('laps');
+    var lapTimerElm = document.getElementById('lap-timer');
     _laps = [];
     _lastLap = null;
+    _lapElapsed = 0;
     lapsElm.innerHTML = '';
+    lapTimerElm.innerHTML = '00:00.00';
+
   };
 
 
@@ -65,6 +78,7 @@ var timerApp = (function(){
       _intervalId = window.setInterval(function(){
         _centiseconds += 1;
         _updateTimer(_centiseconds);
+        _updateLapTimer(_centiseconds);
       }, 10);
     },
     stopTimer: function() {
@@ -93,10 +107,7 @@ var timerApp = (function(){
       var timeStr = null;
       var lapsElm = document.getElementById('laps');
 
-      if (_lastLap === null) {
-        _lastLap = 0;
-      }
-
+      _lapElapsed = 0;
       curLap = _centiseconds - _lastLap;
       _laps.push(curLap);
       _lastLap = _centiseconds;

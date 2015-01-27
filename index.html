@@ -3,24 +3,27 @@
   <head>
     <meta charset="UTF-8">
     <title>Timer App</title>
-     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
     <div class="container timer-app">
-        <h2 class="title">Stopwatch</h2>
-        <div class="timer-container">
-          <span id="timer">00:00:00</span>
+      <h2 class="title">Stopwatch</h2>
+      <div class="timer-container">
+        <div class="group">
+            <p id="lap-timer" class="pull-right light">00:00.00</p>
         </div>
+        <span id="timer">00:00:00</span>
+      </div>
 
-        <div class="nav">
-          <button id="start" class="green">Start</button>
-          <button id="stop" class="hide red">Stop</button>
-          <button id="reset">Reset</button>
-          <button id="lap" class="hide">Lap</button>
-        </div>
+      <div class="nav">
+        <button id="start" class="green">Start</button>
+        <button id="stop" class="hide red">Stop</button>
+        <button id="reset">Reset</button>
+        <button id="lap" class="hide">Lap</button>
+      </div>
 
-        <ul id="laps">
-        </ul>
+      <ul id="laps">
+      </ul>
     </div>
 
     <script src="js/app.js"></script>
