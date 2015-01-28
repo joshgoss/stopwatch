@@ -19,7 +19,7 @@ var timerApp = (function(){
   var _updateTimerViews = function(minutes, seconds, centiseconds) {
     var elm = document.getElementById('timer');
     // Update DOM 
-    elm.innerHTML = _toTwoDigits(minutes) + ':' + _toTwoDigits(seconds) + '.' + _toTwoDigits(centiseconds);
+    elm.innerHTML = _toTwoDigits(minutes) + ':' + _toTwoDigits(seconds) + ':' + _toTwoDigits(centiseconds);
   };
   
   
@@ -35,7 +35,7 @@ var timerApp = (function(){
     var elm = document.getElementById('lap-timer');
     var time = centiseconds - _lastLap;
     var timeData = _getTimeData(time);
-    elm.innerHTML = _toTwoDigits(timeData[0]) + ':' + _toTwoDigits(timeData[1]) + '.' + _toTwoDigits(timeData[2]);
+    elm.innerHTML = _toTwoDigits(timeData[0]) + ':' + _toTwoDigits(timeData[1]) + ':' + _toTwoDigits(timeData[2]);
   };
 
   var _updateTimer = function (centiseconds) {
@@ -51,7 +51,6 @@ var timerApp = (function(){
     _lapElapsed = 0;
     lapsElm.innerHTML = '';
     lapTimerElm.innerHTML = '00:00.00';
-
   };
 
 
@@ -62,7 +61,6 @@ var timerApp = (function(){
     getCentiseconds: function() {
       return _centiseconds;
     },
-
     startTimer: function() {
       var startButton = document.getElementById('start');
       var stopButton = document.getElementById('stop');
@@ -114,7 +112,6 @@ var timerApp = (function(){
 
       timeData = _getTimeData(curLap);
       timeStr = _toTwoDigits(timeData[0]) + ':' + _toTwoDigits(timeData[1]) + ':' + _toTwoDigits(timeData[2]);
-
 
       lapsElm.innerHTML = '<li class="group">' + '<span class="pull-left">Lab ' + _laps.length + '</span> <span class="pull-right">' + timeStr +'</span></li>'+ lapsElm.innerHTML;
       return curLap;
