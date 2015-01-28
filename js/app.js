@@ -19,7 +19,7 @@ var timerApp = (function(){
   var _updateTimerViews = function(minutes, seconds, centiseconds) {
     var elm = document.getElementById('timer');
     // Update DOM 
-    elm.innerHTML = _toTwoDigits(minutes) + ':' + _toTwoDigits(seconds) + ':' + _toTwoDigits(centiseconds);
+    elm.innerHTML = _toTwoDigits(minutes) + ':' + _toTwoDigits(seconds) + '.' + _toTwoDigits(centiseconds);
   };
   
   
@@ -35,7 +35,7 @@ var timerApp = (function(){
     var elm = document.getElementById('lap-timer');
     var time = centiseconds - _lastLap;
     var timeData = _getTimeData(time);
-    elm.innerHTML = _toTwoDigits(timeData[0]) + ':' + _toTwoDigits(timeData[1]) + ':' + _toTwoDigits(timeData[2]);
+    elm.innerHTML = _toTwoDigits(timeData[0]) + ':' + _toTwoDigits(timeData[1]) + '.' + _toTwoDigits(timeData[2]);
   };
 
   var _updateTimer = function (centiseconds) {
