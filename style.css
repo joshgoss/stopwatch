@@ -37,7 +37,7 @@ body, html {
 }
 
 #stopwatch .title {
-    font-size: 1.5em;
+    font-size: 1.75em;
     text-align: center;
 }
 
@@ -68,7 +68,7 @@ body, html {
 #total-timer {
     font-weight: bold;
     display: block;
-    font-size: 3.5em;
+    font-size: 3.75em;
     text-align: center;
     padding: 10px 0;
 }
@@ -118,25 +118,26 @@ button.danger:hover {
 
 #laps li {
     display: block;
-    background: #fefefe;
-    color: #444;
+    background: #333;
+    color: #aaa;
     list-style-type: none;
     padding: 12px;
-    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #444;
 }
 
 #laps li .label {
     text-align: left;
-    color: #777;
+    color: #999;
 }
 
 #laps li .time {
     text-align: right;
-    color: #444;
+    color: #bbb;
 }
 
 @media only screen and (max-width: 450px) {
     #stopwatch {
         width: 100%;
+        margin-top: 0;
     }
 }
