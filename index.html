@@ -1,31 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>Timer App</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Stopwatch</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div class="container timer-app">
-      <h2 class="title">Stopwatch</h2>
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+    <div id="stopwatch">
+      <h1 class="title">Stopwatch</h1>
       <div class="timer-container">
-        <div class="group">
-            <p id="lap-timer" class="pull-right light">00:00.00</p>
+        <div class="lap-container clearfix">
+          <span id="lap-timer" class="pull-right"></span>
+          <span class="label pull-right">Lap: </span>
         </div>
-        <span id="timer">00:00.00</span>
+
+
+        <div class="total-container">
+          <span class="label">Total: </span>
+          <span id="total-timer"></span>
+        </div>
       </div>
 
-      <div class="nav">
-        <button id="start" class="green">Start</button>
-        <button id="stop" class="hide red">Stop</button>
-        <button id="reset">Reset</button>
-        <button id="lap" class="hide">Lap</button>
-      </div>
+      <ul class="buttons">
+        <li id="start">
+          <button class="success">Start</button>
+        </li>
+        <li id="stop" class="hidden">
+          <button class="danger">Stop</button>
+        </li>
+        <li id="reset" class="hidden">
+          <button class="danger">Reset</button>
+        </li>
+        <li id="lap" class="hidden">
+          <button>Lap</button>
+        </li>
+      </ul>
 
       <ul id="laps">
       </ul>
     </div>
 
-    <script src="js/app.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
