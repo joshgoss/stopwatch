@@ -3,8 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Stopwatch</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stopwatch</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   </head>
   <body>
     <!--[if lte IE 9]>
@@ -14,35 +21,37 @@
         your experience and security.
       </p>
     <![endif]-->
-    <main class="stopwatch" id="stopwatch">
-      <h1 class="sr-only">Stopwatch</h1>
+    <div class="container">
+      <div class="brand">
+        <img src="/logo.png" alt="Stopwatch Logo" height="100" width="100" />
+        <h1>Stopwatch</h1>
+      </div>
 
-      <div class="timers">
-        <!-- Total timer -->
-        <div class="timer total">
-          <span id="total-timer"></span>
-          <div class="label">Total</div>
+      <div class="stopwatch" id="stopwatch">
+        <div class="timers">
+          <div class="timer total-timer-container">
+            <span id="total-timer"></span>
+            <div class="label">Total</div>
+          </div>
+
+          <div class="timer lap-time-container">
+            <div class="ring"></div>
+            <span id="lap-timer"></span>
+            <div class="label">Lap</div>
+          </div>
         </div>
 
-        <!-- Lap timer -->
-        <div class="timer lap">
-          <div class="ring"></div>
-          <span id="lap-timer"></span>
-          <div class="label">Lap</div>
+        <div class="buttons">
+          <button id="start" class="btn primary">Start</button>
+          <button id="lap" class="btn secondary hidden">Lap</button>
+          <button id="stop" class="btn warn hidden">Stop</button>
+          <button id="reset" class="btn ghost hidden">Reset</button>
         </div>
       </div>
 
-      <!-- Buttons now sit directly under the timers -->
-      <div class="buttons">
-        <button id="start" class="btn primary">Start</button>
-        <button id="lap" class="btn secondary hidden">Lap</button>
-        <button id="stop" class="btn warn hidden">Stop</button>
-        <button id="reset" class="btn ghost hidden">Reset</button>
-      </div>
-
-      <!-- Laps list moved below the buttons -->
       <ul class="laps" id="laps" aria-live="polite"></ul>
-    </main>
+    </div>
+
     <script type="module" src="src/main.js"></script>
   </body>
 </html>
