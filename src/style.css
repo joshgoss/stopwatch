@@ -1,0 +1,306 @@
+:root {
+  --bg: #0b0c10;
+  --panel: #121319;
+  --text: #e8eaf0;
+  --muted: #9aa3b2;
+  --accent: #6aa3ff;
+  --warn: #ff6a6a;
+  --ok: #55d187;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+
+  /* wheel timings */
+  --roll-ms: 160ms;
+  --tick-ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  min-height: 100svh;
+  background: radial-gradient(1200px 800px at 70% -10%, #131722, #0a0b10);
+  color: var(--text);
+  font:
+    500 16px/1.3 ui-sans-serif,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial;
+}
+
+.container {
+  position: static; /* normal flow on mobile */
+  margin-top: 1rem;
+  width: 100%;
+  padding-inline: 4vw;
+}
+
+.brand {
+  display: flex;
+  margin: 10px 0 10px 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.brand h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  font-size: 2.5em;
+}
+
+.stopwatch {
+  position: relative;
+  background: var(--panel);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+/* Timers */
+.timers {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.timer {
+  position: relative;
+  background: #0f1218;
+  border: 1px solid #1c2130;
+  border-radius: 14px;
+  padding: 18px 16px 14px;
+}
+
+.timers .label {
+  color: var(--muted);
+  margin-top: 8px;
+  font-size: 1em;
+}
+.timer.total {
+  border-color: #22314d;
+}
+.timer.lap {
+  border-color: #273a2e;
+}
+
+/* Lap progress ring (sweeps once per second) */
+.timer .ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 16px;
+  z-index: 0;
+  background: conic-gradient(
+    from -90deg,
+    color-mix(in oklab, var(--ok) 30%, transparent) calc(var(--p, 0) * 100%),
+    transparent 0
+  );
+  filter: blur(10px) saturate(1.2);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Digit wheels (roll swap) */
+.wheels {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.15ch; /* tighter spacing */
+  font-weight: 700;
+  font-size: clamp(28px, 6vw, 44px);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0; /* no extra spacing */
+  line-height: 1;
+}
+
+/* Old-school digit frames */
+.digit {
+  display: inline-flex;
+  justify-content: center;
+  align-items: stretch;
+  width: 1.15ch; /* slight padding around glyph */
+  height: 1.25em; /* a hair taller than line for the frame */
+  padding-inline: 0.05ch;
+  border: 1px solid #263042; /* subtle bezel */
+  border-radius: 6px;
+  background: linear-gradient(#0c1016, #0a0e14);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+  overflow: hidden; /* clip the roller */
+}
+
+/* The two-row roller */
+.digit .roller {
+  display: block;
+  transform: translateY(0);
+  transition: transform var(--roll-ms) var(--tick-ease);
+  will-change: transform;
+}
+
+/* Exactly one row height per value */
+.digit .val {
+  display: block;
+  height: 1.25em; /* match .digit height so one row shows */
+  line-height: 1.25em; /* center the glyph vertically */
+}
+
+/* Separators (don’t roll) */
+.sep {
+  opacity: 0.9;
+  display: inline-block;
+  min-width: 0.6ch;
+}
+
+/* Blink separators while running */
+.stopwatch.running .sep {
+  animation: blink 0.9s steps(1, end) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 24px 0 6px;
+}
+.btn {
+  font-size: 1em;
+  border: 1px solid #2a2f3e;
+  background: #121826;
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    transform 120ms var(--ease),
+    background 150ms var(--ease),
+    border-color 150ms var(--ease);
+  will-change: transform;
+}
+.btn.primary {
+  border-color: #2a3f6a;
+  background: #12203b;
+}
+.btn.secondary {
+  border-color: #2a3e33;
+  background: #12251a;
+}
+.btn.warn {
+  border-color: #4e2b2b;
+  background: #2a1414;
+}
+.btn.ghost {
+  background: transparent;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* IMPORTANT: hidden is now hard-hide */
+.hidden {
+  display: none !important;
+}
+
+/* Laps (now below buttons) */
+.laps {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  border-top: 1px dashed #222737;
+}
+.laps li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  font-size: 0.875em;
+  gap: 12px;
+  padding: 10px 8px;
+  border-bottom: 1px dashed #1b2030;
+  align-items: center;
+}
+.laps li .label {
+  color: var(--muted);
+}
+
+/* Lap add animation: slide/fade + brief highlight */
+.laps li.enter {
+  animation:
+    lap-enter 220ms var(--ease),
+    lap-flash 500ms ease-out;
+}
+@keyframes lap-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes lap-flash {
+  0% {
+    background: color-mix(in oklab, var(--ok) 18%, transparent);
+  }
+  100% {
+    background: transparent;
+  }
+}
+
+/* Start pulse (one-shot on start) */
+.stopwatch.pulse .wheels {
+  animation: pulse 180ms var(--ease);
+}
+@keyframes pulse {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* A11y helpers */
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (min-width: 720px) {
+  .container {
+    position: absolute; /* anchor to top & center horizontally */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 720px; /* fixed cap for large screens */
+    padding-inline: 0; /* gutters not needed at this width */
+  }
+
+  .timers {
+    grid-template-columns: 1fr 1fr;
+  }
+}
