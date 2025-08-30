@@ -67,26 +67,26 @@ npm run typecheck
 
 ```
 stopwatch/
-├── index.html
-├── package.json
-├── package-lock.json
-├── tsconfig.json
-├── vite.config.js
+├── index.html                 — app HTML shell
+├── package.json               — scripts and dependencies
+├── package-lock.json          — lockfile
+├── tsconfig.json              — type-checking configuration
+├── vite.config.js             — Vite config
 │
-├── public/
-│   ├── favicon.ico
-│   ├── favicon-16x16.png
-│   ├── favicon-32x32.png
-│   └── logo.png
+├── public/                    — static assets served at /
+│   ├── favicon.ico            — favicon (ICO)
+│   ├── favicon-16x16.png      — favicon 16×16
+│   ├── favicon-32x32.png      — favicon 32×32
+│   └── logo.png               — app logo
 │
-└── src/
-    ├── main.js
-    ├── controller.js
-    ├── models.js
-    ├── views.js
-    ├── utils.js
-    ├── types.js
-    └── style.css
+└── src/                       — application source
+    ├── main.js                — app entry point
+    ├── controller.js          — event wiring and control flow
+    ├── models.js              — stopwatch state and timing
+    ├── views.js               — UI rendering
+    ├── utils.js               — utilities
+    ├── types.js               — shared JSDoc typedefs
+    └── style.css              — styles
 ```
 
 ---
